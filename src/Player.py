@@ -7,8 +7,8 @@ class Player:
     def __init__(self, init_x, init_y, width, height):
         # instance attribute
         self.utils = Utils()
-        self.init_x = init_x
-        self.init_y = init_y
+        self.x = init_x
+        self.y = init_y
         self.width = width
         self.height = height
         self.isJump = False
@@ -19,7 +19,7 @@ class Player:
         self.walkCount = 0
         self.jumpCount = Utils.initCount
 
-    def reDrawGameWin(self, win):
+    def reDrawGameWin(self, win, bullets):
         win.blit(self.utils.bg_image, (0, 0))  # This will draw our background image at (0,0)
         if self.walkCount + 1 >= Utils.clockTick:
             self.walkCount = 0
@@ -27,32 +27,36 @@ class Player:
         if  (self.isWalking):
             if self.left:  # facing left
                 win.blit(self.utils.walkLeft[self.walkCount // int(Utils.clockTick / len(Utils.img_list))],
-                         (self.init_x, self.init_y))  # We integer divide walkCount by a k(Utils.clockTick / len(Utils.img_list)) to ensure each
+                         (self.x, self.y))  # We integer divide walkCount by a k(Utils.clockTick / len(Utils.img_list)) to ensure each
                                                     # image is shown k times every animation
             elif self.right:  # facing right
                 win.blit(self.utils.walkRight[self.walkCount // int(Utils.clockTick / len(Utils.img_list))],
-                         (self.init_x, self.init_y))
+                         (self.x, self.y))
             self.walkCount += 1
         #if it's not walking, loads first image
         else:
-            if self.right: #if is turned on right
-                win.blit(self.utils.walkRight[0], (self.init_x, self.init_y))  # If the character is standing still
-            else: #if is turned on left
-                win.blit(self.utils.walkLeft[0], (self.init_x, self.init_y))
+            if self.left: #if is turned on left
+                win.blit(self.utils.walkLeft[0], (self.x, self.y))  # If the character is standing still
+            else: #if is turned on right
+                win.blit(self.utils.walkRight[0], (self.x, self.y))
         # pygame.draw.rect(win, (255, 0, 0), (init_x, init_y, charact_width, charact_height))
+        for bullet in bullets:
+            bullet.draw(win)
         pygame.display.update()
 
     def goLeft(self):
-        self.init_x -= Utils.vel #decrement x
-        self.left = True
-        self.right = False
-        self.isWalking = True
+        if self.x > Utils.vel - Utils.charact_width / 2:
+            self.x -= Utils.vel #decrement x
+            self.left = True
+            self.right = False
+            self.isWalking = True
 
     def goRight(self):
-        self.init_x += Utils.vel #increment x
-        self.left = False
-        self.right = True
-        self.isWalking = True
+        if self.x < Utils.screen_width - Utils.charact_width:
+            self.x += Utils.vel #increment x
+            self.left = False
+            self.right = True
+            self.isWalking = True
 
     def isStopped(self):
         self.walkCount = 0
@@ -71,7 +75,7 @@ class Player:
         # dopo la y viene incrementata: scende
         else:
             alfa = -1
-        self.init_y -= alfa * (self.jumpCount ** 2) * 0.5
+        self.y -= alfa * (self.jumpCount ** 2) * 0.5
         self.jumpCount -= 1
         if self.jumpCount < -Utils.initCount:
             self.isJump = False

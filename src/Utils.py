@@ -2,8 +2,8 @@ import pygame
 
 class Utils:
     #Class attributes (static)
-    init_pos_x = 50
-    init_pos_y = 50
+    init_pos_x = 200
+    init_pos_y = 410
     screen_width = 500
     screen_height = 480
     charact_width = 40
