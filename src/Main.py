@@ -24,9 +24,9 @@ while player.run:
     #fires bullets
     if keys[pygame.K_SPACE]:
         facing = -1 if player.left else 1
-        if len(bullets) < 5:
+        if len(bullets) < Utils.numMaxBullet: #it fires until numMAx bullets
             # create a bullet starting at the middle of the character and put in bullets vector
-            bullets.append(Projectile(round(player.x+player.width/2), round(player.y+player.height/2), 6, (0, 0, 0), facing))
+            bullets.append(Projectile(round(player.x+player.width/2), round(player.y+player.height/2), 6, (255, 0, 0), facing))
     # move bullets
     for bullet in bullets:
         if bullet.x < Utils.screen_width and bullet.x > 0:

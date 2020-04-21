@@ -64,8 +64,8 @@ class Player:
 
     def stopJump(self):
         self.isJump = True
-        self.right = False
-        self.left = False
+        # self.right = False
+        # self.left = False
         self.walkCount = 0
 
     def jump(self):

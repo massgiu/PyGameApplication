@@ -10,6 +10,7 @@ class Utils:
     charact_height = 60
     initCount = 10
     vel = 5
+    numMaxBullet = 5
     img_list = [x for x in range(10) if x > 0]
     walkRight = [pygame.image.load('../media/R' + str(x) + '.png') for x in img_list]
     walkLeft = [pygame.image.load('../media/L' + str(x) + '.png') for x in img_list]
