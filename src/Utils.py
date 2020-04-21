@@ -1,15 +1,15 @@
 import pygame
 
 class Utils:
+    #Class attributes (static)
     init_pos_x = 50
     init_pos_y = 50
     screen_width = 500
     screen_height = 480
     charact_width = 40
     charact_height = 60
-    vel = 5
-    run = True
     initCount = 10
+    vel = 5
     img_list = [x for x in range(10) if x > 0]
     walkRight = [pygame.image.load('../media/R' + str(x) + '.png') for x in img_list]
     walkLeft = [pygame.image.load('../media/L' + str(x) + '.png') for x in img_list]
