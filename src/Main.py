@@ -11,7 +11,7 @@ pygame.display.set_caption("My Game")
 
 clock = pygame.time.Clock()  # create an object to help track time
 player = Player(Utils.init_pos_x,Utils.init_pos_y,Utils.charact_width,Utils.charact_height)
-goblin = Enemy(100, 410, 64, 64, 300)
+goblin = Enemy(Utils.enemy_init_pos_x, Utils.enemy_init_pos_y, Utils.enemy_width, Utils.enemy_height, 300)
 bullets = []
 
 while player.run:

@@ -1,28 +1,24 @@
 from src.Utils import Utils
+from src.AbstractCharacter import AbstractCharacter
 import pygame
 
 
-class Player:
+class Player(AbstractCharacter):
     # class attribute
     def __init__(self, init_x, init_y, width, height):
-        # instance attribute
-        self.utils = Utils()
-        self.x = init_x
-        self.y = init_y
-        self.width = width
-        self.height = height
+        super().__init__(init_x, init_y, width, height)
+        self.vel = Utils.vel
         self.isJump = False
         self.run = True
         self.right = False
         self.left = False
         self.isWalking = False
-        self.walkCount = 0
         self.jumpCount = Utils.initCount
 
     def draw(self, win, bullets):
         if self.walkCount + 1 >= Utils.clockTick:
             self.walkCount = 0
-        # we need to select in the array walkLeft e walkRight the index
+        # we need to select in the array walkLeft e walkRight, the index
         if  (self.isWalking):
             if self.left:  # facing left
                 win.blit(Utils.walkLeft[self.walkCount // int(Utils.clockTick / len(Utils.img_list))],
@@ -43,15 +39,15 @@ class Player:
         pygame.display.update()
 
     def go_left(self):
-        if self.x > Utils.vel - Utils.charact_width / 2:
-            self.x -= Utils.vel #decrement x
+        if self.x > self.vel - self.width / 2:
+            self.x -= self.vel #decrement x
             self.left = True
             self.right = False
             self.isWalking = True
 
     def go_right(self):
-        if self.x < Utils.screen_width - Utils.charact_width:
-            self.x += Utils.vel #increment x
+        if self.x < Utils.screen_width - self.width:
+            self.x += self.vel #increment x
             self.left = False
             self.right = True
             self.isWalking = True

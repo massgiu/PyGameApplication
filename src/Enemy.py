@@ -1,15 +1,12 @@
+from src.AbstractCharacter import AbstractCharacter
 from src.Utils import Utils
 
 
-class Enemy:
+class Enemy(AbstractCharacter):
 
     def __init__(self, x, y, width, height, end):
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
+        super().__init__(x, y, width, height)
         self.path = [x, end]  # This will define where our enemy starts and finishes their path.
-        self.walkCount = 0
         self.vel = Utils.enemyVel
 
     # This method manages images during enemy's movement

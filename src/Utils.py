@@ -4,10 +4,14 @@ class Utils:
     #Class attributes (static)
     init_pos_x = 200
     init_pos_y = 410
+    enemy_init_pos_x = 100
+    enemy_init_pos_y = 410
     screen_width = 500
     screen_height = 480
     charact_width = 40
     charact_height = 60
+    enemy_width = 64
+    enemy_height = 64
     initCount = 10
     vel = 5
     enemyVel = 3
