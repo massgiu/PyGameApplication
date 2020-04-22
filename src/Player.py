@@ -19,50 +19,48 @@ class Player:
         self.walkCount = 0
         self.jumpCount = Utils.initCount
 
-    def reDrawGameWin(self, win, bullets):
-        win.blit(self.utils.bg_image, (0, 0))  # This will draw our background image at (0,0)
+    def draw(self, win, bullets):
         if self.walkCount + 1 >= Utils.clockTick:
             self.walkCount = 0
         # we need to select in the array walkLeft e walkRight the index
         if  (self.isWalking):
             if self.left:  # facing left
-                win.blit(self.utils.walkLeft[self.walkCount // int(Utils.clockTick / len(Utils.img_list))],
+                win.blit(Utils.walkLeft[self.walkCount // int(Utils.clockTick / len(Utils.img_list))],
                          (self.x, self.y))  # We integer divide walkCount by a k(Utils.clockTick / len(Utils.img_list)) to ensure each
                                                     # image is shown k times every animation
             elif self.right:  # facing right
-                win.blit(self.utils.walkRight[self.walkCount // int(Utils.clockTick / len(Utils.img_list))],
+                win.blit(Utils.walkRight[self.walkCount // int(Utils.clockTick / len(Utils.img_list))],
                          (self.x, self.y))
             self.walkCount += 1
         #if it's not walking, loads first image
         else:
             if self.left: #if is turned on left
-                win.blit(self.utils.walkLeft[0], (self.x, self.y))  # If the character is standing still
+                win.blit(Utils.walkLeft[0], (self.x, self.y))  # If the character is standing still
             else: #if is turned on right
-                win.blit(self.utils.walkRight[0], (self.x, self.y))
-        # pygame.draw.rect(win, (255, 0, 0), (init_x, init_y, charact_width, charact_height))
+                win.blit(Utils.walkRight[0], (self.x, self.y))
         for bullet in bullets:
             bullet.draw(win)
         pygame.display.update()
 
-    def goLeft(self):
+    def go_left(self):
         if self.x > Utils.vel - Utils.charact_width / 2:
             self.x -= Utils.vel #decrement x
             self.left = True
             self.right = False
             self.isWalking = True
 
-    def goRight(self):
+    def go_right(self):
         if self.x < Utils.screen_width - Utils.charact_width:
             self.x += Utils.vel #increment x
             self.left = False
             self.right = True
             self.isWalking = True
 
-    def isStopped(self):
+    def is_stopped(self):
         self.walkCount = 0
         self.isWalking = False
 
-    def stopJump(self):
+    def stop_jump(self):
         self.isJump = True
         # self.right = False
         # self.left = False

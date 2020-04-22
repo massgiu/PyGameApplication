@@ -1,6 +1,7 @@
 import pygame
 from src.Utils import Utils
 from src.Player import Player
+from src.Enemy import Enemy
 from src.Projectile import Projectile
 
 pygame.init()
@@ -9,7 +10,8 @@ win = pygame.display.set_mode((Utils.screen_width, Utils.screen_height))
 pygame.display.set_caption("My Game")
 
 clock = pygame.time.Clock()  # create an object to help track time
-player = Player(Utils.init_pos_x,Utils.init_pos_y,Utils.charact_width,Utils.charact_height);
+player = Player(Utils.init_pos_x,Utils.init_pos_y,Utils.charact_width,Utils.charact_height)
+goblin = Enemy(100, 410, 64, 64, 300)
 bullets = []
 
 while player.run:
@@ -35,12 +37,12 @@ while player.run:
             bullets.pop(bullets.index(bullet))
     #Left
     if keys[pygame.K_LEFT]:
-        player.goLeft()
+        player.go_left()
     #Right
     elif keys[pygame.K_RIGHT]:
-        player.goRight()
+        player.go_right()
     else:
-        player.isStopped()
+        player.is_stopped()
     #Not jumping: Up and Down and jump
     if not (player.isJump):
         # if keys[pygame.K_UP] and player.y > Utils.vel- Utils.charact_height/2:
@@ -48,9 +50,12 @@ while player.run:
         # if keys[pygame.K_DOWN] and player.y < Utils.screen_height - Utils.charact_height:
         #     player.y += Utils.vel
         if keys[pygame.K_UP]:
-            player.stopJump()
+            player.stop_jump()
     #Player jumping
     else:
         player.jump()
-    player.reDrawGameWin(win,bullets)
+    # Load background image at (0,0)
+    win.blit(Utils.bg_image, (0, 0))
+    goblin.draw(win)
+    player.draw(win, bullets)
 pygame.quit()
