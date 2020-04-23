@@ -1,4 +1,5 @@
 from src.Utils import Utils
+from src.Projectile import Projectile
 from src.AbstractCharacter import AbstractCharacter
 import pygame
 
@@ -14,12 +15,15 @@ class Player(AbstractCharacter):
         self.left = False
         self.isWalking = False
         self.jumpCount = Utils.initCount
+        self.bullets = []
 
-    def draw(self, win, bullets):
+    def draw(self, win):
+        # move bullets at every cycle scan
+        self.move_bullets()
         if self.walkCount + 1 >= Utils.clockTick:
             self.walkCount = 0
         # we need to select in the array walkLeft e walkRight, the index
-        if  (self.isWalking):
+        if self.isWalking:
             if self.left:  # facing left
                 win.blit(Utils.walkLeft[self.walkCount // int(Utils.clockTick / len(Utils.img_list))],
                          (self.x, self.y))  # We integer divide walkCount by a k(Utils.clockTick / len(Utils.img_list)) to ensure each
@@ -34,7 +38,7 @@ class Player(AbstractCharacter):
                 win.blit(Utils.walkLeft[0], (self.x, self.y))  # If the character is standing still
             else: #if is turned on right
                 win.blit(Utils.walkRight[0], (self.x, self.y))
-        for bullet in bullets:
+        for bullet in self.bullets:
             bullet.draw(win)
         pygame.display.update()
 
@@ -56,7 +60,7 @@ class Player(AbstractCharacter):
         self.walkCount = 0
         self.isWalking = False
 
-    def stop_jump(self):
+    def start_jumping(self):
         self.isJump = True
         # self.right = False
         # self.left = False
@@ -74,3 +78,18 @@ class Player(AbstractCharacter):
         if self.jumpCount < -Utils.initCount:
             self.isJump = False
             self.jumpCount = Utils.initCount
+
+    def fire_bullets(self):
+        facing = -1 if self.left else 1
+        if len(self.bullets) < Utils.numMaxBullet:  # it fires until numMAx bullets
+            # create a bullet starting at the middle of the character and put in bullets vector
+            self.bullets.append(
+                Projectile(round(self.x + self.width / 2), round(self.y + self.height / 2), 6, (255, 0, 0),
+                           facing))
+
+    def move_bullets(self):
+        for bullet in self.bullets:
+            if bullet.x < Utils.screen_width and bullet.x > 0:
+                bullet.x += bullet.vel
+            else:  # remove bullets out of screen
+                self.bullets.pop(self.bullets.index(bullet))
