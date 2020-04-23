@@ -24,7 +24,7 @@ while player.run:
 
     # fires bullets
     if keys[pygame.K_SPACE]:
-        player.fire_bullets()
+        player.fire_bullets(goblin)
     # Left
     if keys[pygame.K_LEFT]:
         player.go_left()

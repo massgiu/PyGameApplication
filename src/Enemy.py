@@ -1,5 +1,6 @@
 from src.AbstractCharacter import AbstractCharacter
 from src.Utils import Utils
+import pygame
 
 
 class Enemy(AbstractCharacter):
@@ -24,6 +25,9 @@ class Enemy(AbstractCharacter):
             win.blit(Utils.walkLeftE[self.walkCount // int(Utils.clockTickEnemy / len(Utils.img_list_enemy))],
                      (self.x, self.y))
             self.walkCount += 1
+        #hitbox
+        self.hitbox = (self.x + 15, self.y + 2, 30, 58)
+        pygame.draw.rect(win, (255, 0, 0), self.hitbox, 1)
 
     def move(self):
         if self.vel > 0:  # If we are moving right
@@ -43,3 +47,6 @@ class Enemy(AbstractCharacter):
         self.vel = self.vel * -1
         self.x += self.vel
         self.walkCount = 0
+
+    def hit(self):
+        print('hit')
