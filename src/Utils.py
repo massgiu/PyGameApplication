@@ -16,6 +16,7 @@ class Utils:
     vel = 5
     enemyVel = 3
     numMaxBullet = 5
+    enemy_health = 10
     img_list = [x for x in range(10) if x > 0]
     img_list_enemy = [x for x in range(11) if x > 0]
     walkRight = [pygame.image.load('../media/R' + str(x) + '.png') for x in img_list]

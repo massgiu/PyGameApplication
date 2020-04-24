@@ -13,3 +13,7 @@ class AbstractCharacter(ABC):
     @abstractmethod
     def draw(self,win):
         pass
+
+    @abstractmethod
+    def hit(self):
+        pass

@@ -22,6 +22,8 @@ while player.run:
 
     keys = pygame.key.get_pressed()
 
+    player.check_hit(goblin)
+
     # fires bullets
     if keys[pygame.K_SPACE]:
         player.fire_bullets(goblin)
