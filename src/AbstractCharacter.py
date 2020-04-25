@@ -9,6 +9,7 @@ class AbstractCharacter(ABC):
         self.width = width
         self.height = height
         self.walkCount = 0
+        self.visible = True
 
     @abstractmethod
     def draw(self,win):

@@ -12,7 +12,7 @@ class Utils:
     charact_height = 60
     enemy_width = 64
     enemy_height = 64
-    initCount = 10
+    init_count = 10
     vel = 5
     enemyVel = 3
     numMaxBullet = 5

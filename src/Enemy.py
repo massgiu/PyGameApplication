@@ -10,7 +10,6 @@ class Enemy(AbstractCharacter):
         self.path = [x, end]  # This will define where our enemy starts and finishes its walking.
         self.vel = Utils.enemyVel
         self.health = Utils.enemy_health
-        self.visible = True
         self.hitbox = (self.x + 15, self.y + 2, 30, 58)
 
     # This method manages images during enemy's movement

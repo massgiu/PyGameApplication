@@ -37,10 +37,6 @@ while player.run:
         player.is_stopped()
     # Up and Down and jump
     if not (player.isJump):
-        # if keys[pygame.K_UP] and player.y > Utils.vel- Utils.charact_height/2:
-        #     player.y -= Utils.vel
-        # if keys[pygame.K_DOWN] and player.y < Utils.screen_height - Utils.charact_height:
-        #     player.y += Utils.vel
         if keys[pygame.K_UP]:
             player.start_jumping()
     # Player jumping
