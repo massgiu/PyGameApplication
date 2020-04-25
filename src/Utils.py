@@ -2,12 +2,12 @@ import pygame
 
 class Utils:
     #Class attributes (static)
-    init_pos_x = 200
-    init_pos_y = 410
-    enemy_init_pos_x = 100
-    enemy_init_pos_y = 410
-    screen_width = 500
-    screen_height = 480
+    init_pos_x = 100
+    init_pos_y = 580# 410
+    enemy_init_pos_x = init_pos_x+100
+    enemy_init_pos_y = init_pos_y
+    screen_width = 990 #500
+    screen_height = 675 #480
     charact_width = 40
     charact_height = 60
     enemy_width = 64
@@ -25,5 +25,5 @@ class Utils:
     walkLeftE = [pygame.image.load('../media/L' + str(x) + 'E.png') for x in img_list_enemy]
     clockTick = int(len(img_list)) * 3  # higher is factor, higher is speed animation
     clockTickEnemy = int(len(img_list_enemy)) * 3  # higher is factor, higher is speed animation
-    bg_image = pygame.image.load('../media/bg.jpg')
+    bg_image = pygame.image.load('../media/bg1.jpg')
     char = pygame.image.load('../media/standing.png')

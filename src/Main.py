@@ -10,11 +10,11 @@ pygame.display.set_caption("My Game")
 
 clock = pygame.time.Clock()  # create an object to help track time
 player = Player(Utils.init_pos_x, Utils.init_pos_y, Utils.charact_width, Utils.charact_height)
-goblin = Enemy(Utils.enemy_init_pos_x, Utils.enemy_init_pos_y, Utils.enemy_width, Utils.enemy_height, 300)
+goblin = Enemy(Utils.enemy_init_pos_x, Utils.enemy_init_pos_y, Utils.enemy_width, Utils.enemy_height, Utils.screen_width - 150)
 
 
 while player.run:
-    clock.tick(Utils.clockTick)  # se diminuisce, va più lento (frame rate for sec)
+    clock.tick(Utils.clockTick)  # if descreases, goes faster (frame rate for sec)
     # check events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

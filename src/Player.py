@@ -42,7 +42,7 @@ class Player(AbstractCharacter):
                 win.blit(Utils.walkLeft[0], (self.x, self.y))  # If the character is standing still
             else:  # if is turned on right
                 win.blit(Utils.walkRight[0], (self.x, self.y))
-        pygame.draw.rect(win, (255, 0, 0), self.hitbox, -   1) #-1 no lines, 0 fill, 1 thin line
+        pygame.draw.rect(win, (255, 0, 0), self.hitbox, -1) #-1 no lines, 0 fill, 1 thin line
         # bullets
         if self.shootLoop < Utils.numMaxBullet // 2:
             self.shootLoop += 1
@@ -53,8 +53,6 @@ class Player(AbstractCharacter):
         # enemy display score
         font = pygame.font.SysFont("comicsans", 30, False)  # True means bold
         text = font.render("Score: " + str(self.score), 1, (0, 0, 0))  # Arguments are: text, anti-aliasing, color
-        # update hitbox
-        self.hitbox = (self.x + 15, self.y + 10, 30, 55)
         # player display score
         # font1 = pygame.font.SysFont('comicsans', 100)
         # text = font1.render('-5', 1, (255, 0, 0))
@@ -62,12 +60,17 @@ class Player(AbstractCharacter):
         win.blit(text, (Utils.screen_width - 120, 10))
         pygame.display.update()
 
+    def __update_hit_box_pos(self):
+        # update hitbox position
+        self.hitbox = (self.x + 15, self.y + 10, 30, 55)
+
     def go_left(self):
         if self.x > self.vel - self.width / 2:
             self.x -= self.vel  # decrement x
             self.left = True
             self.right = False
             self.isWalking = True
+            self.__update_hit_box_pos()
 
     def go_right(self):
         if self.x < Utils.screen_width - self.width:
@@ -75,6 +78,7 @@ class Player(AbstractCharacter):
             self.left = False
             self.right = True
             self.isWalking = True
+            self.__update_hit_box_pos()
 
     def is_stopped(self):
         self.walkCount = 0
@@ -85,6 +89,7 @@ class Player(AbstractCharacter):
         # self.right = False
         # self.left = False
         self.walkCount = 0
+        self.__update_hit_box_pos()
 
     def jump(self):
         # inizialmente la y viene decrementata: sale
@@ -98,6 +103,7 @@ class Player(AbstractCharacter):
         if self.jumpCount < -Utils.init_count:
             self.isJump = False
             self.jumpCount = Utils.init_count
+        self.__update_hit_box_pos()
 
     def fire_bullets(self, enemy):
         if self.shootLoop == 0:
@@ -124,6 +130,7 @@ class Player(AbstractCharacter):
 
     #This metodh decrements score if goblin hits player
     def check_hit(self,enemy):
+        self.enemy = enemy
         if enemy.visible and self.hitbox[1] < self.hitbox[1] + enemy.hitbox[3] and self.hitbox[1] + self.hitbox[3] > enemy.hitbox[1]:
             if self.hitbox[0] + self.hitbox[2] > enemy.hitbox[0] and self.hitbox[0] < enemy.hitbox[0] + \
                     enemy.hitbox[2]:
