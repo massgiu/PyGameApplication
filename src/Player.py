@@ -51,7 +51,7 @@ class Player(AbstractCharacter):
         for bullet in self.bullets:
             bullet.draw(win)
         # enemy display score
-        font = pygame.font.SysFont("comicsans", 30, False)  # True means bold
+        font = pygame.font.SysFont("comicsans", Utils.font_size, False)  # True means bold
         text = font.render("Score: " + str(self.score), 1, (0, 0, 0))  # Arguments are: text, anti-aliasing, color
         # player display score
         # font1 = pygame.font.SysFont('comicsans', 100)
@@ -138,25 +138,25 @@ class Player(AbstractCharacter):
 
     def hit(self):
         self.score -= 25
-        if self.score>0:
-            # reset the player position
-            self.x = 0
-            self.y = Utils.init_pos_y
-            self.isJump = False
-            self.jumpCount = Utils.init_count
-            self.walkCount = 0
-            pygame.display.update()
-            # i = 0
-            # while i < 200:
-            #     pygame.time.delay(10)
-            #     i += 1
-            #     #This code gives opportunity to exit during pause
-            #     for event in pygame.event.get():
-            #         if event.type == pygame.QUIT:
-            #             i = 301
-            #             pygame.quit()
 
-            # After we are hit we are going to display a message to the screen for
-            # a certain period of time
-        else:
-            pygame.display.update()
+        # reset the player position
+        self.x = 0
+        self.y = Utils.init_pos_y
+        self.isJump = False
+        self.jumpCount = Utils.init_count
+        self.walkCount = 0
+        pygame.display.update()
+        # i = 0
+        # while i < 200:
+        #     pygame.time.delay(10)
+        #     i += 1
+        #     #This code gives opportunity to exit during pause
+        #     for event in pygame.event.get():
+        #         if event.type == pygame.QUIT:
+        #             i = 301
+        #             pygame.quit()
+
+        # After we are hit we are going to display a message to the screen for
+        # a certain period of time
+        # else:
+        #     pygame.display.update()

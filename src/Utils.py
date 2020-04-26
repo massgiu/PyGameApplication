@@ -27,3 +27,4 @@ class Utils:
     clockTickEnemy = int(len(img_list_enemy)) * 3  # higher is factor, higher is speed animation
     bg_image = pygame.image.load('../media/bg1.jpg')
     char = pygame.image.load('../media/standing.png')
+    font_size = 30
