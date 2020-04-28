@@ -10,7 +10,7 @@ pygame.display.set_caption("My Game")
 
 clock = pygame.time.Clock()  # create an object to help track time
 player = Player(Utils.init_pos_x, Utils.init_pos_y, Utils.charact_width, Utils.charact_height)
-goblin = Enemy(Utils.enemy_init_pos_x, Utils.enemy_init_pos_y, Utils.enemy_width, Utils.enemy_height, Utils.screen_width - 150)
+enemy = Enemy(Utils.enemy_init_pos_x, Utils.enemy_init_pos_y, Utils.enemy_width, Utils.enemy_height, Utils.screen_width - 150)
 
 
 while player.run:
@@ -22,11 +22,11 @@ while player.run:
 
     keys = pygame.key.get_pressed()
 
-    player.check_hit(goblin)
+    player.check_hit(enemy)
 
     # fires bullets
     if keys[pygame.K_SPACE]:
-        player.fire_bullets(goblin)
+        player.fire_bullets(enemy)
     # Left
     if keys[pygame.K_LEFT]:
         player.go_left()
@@ -44,6 +44,6 @@ while player.run:
         player.jump()
     # Load background image at (0,0)
     win.blit(Utils.bg_image, (0, 0))
-    goblin.draw(win)
+    enemy.draw(win)
     player.draw(win)
 pygame.quit()

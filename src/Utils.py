@@ -20,9 +20,9 @@ class Utils:
     img_list = [x for x in range(15) if x > 0]
     img_list_enemy = [x for x in range(11) if x > 0]
     walkRight = [pygame.image.load('../media/R' + str(x) + '.png') for x in img_list]
-    walkRight = [pygame.transform.scale(x, (60, 70)) for x in walkRight]
+    walkRight = [pygame.transform.scale(x, (60, 70)) for x in walkRight] #rescale
     walkLeft = [pygame.image.load('../media/L' + str(x) + '.png') for x in img_list]
-    walkLeft = [pygame.transform.scale(x, (60, 70)) for x in walkLeft]
+    walkLeft = [pygame.transform.scale(x, (60, 70)) for x in walkLeft] #rescale
     walkRightE = [pygame.image.load('../media/R' + str(x) + 'E.png') for x in img_list_enemy]
     walkLeftE = [pygame.image.load('../media/L' + str(x) + 'E.png') for x in img_list_enemy]
     clockTick = int(len(img_list)) * 3  # higher is factor, higher is speed animation
