@@ -113,6 +113,7 @@ class Player(AbstractCharacter):
                 self.bullets.append(Projectile(round(self.x + self.width / 2), round(self.y + self.height / 2), 6,
                                                (255, 0, 0), facing))
 
+    # This metodh manges bullet movement
     def move_bullets(self):
         for bullet in self.bullets:
             if Utils.screen_width > bullet.x > 0:
